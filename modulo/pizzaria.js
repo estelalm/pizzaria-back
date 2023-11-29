@@ -1,6 +1,6 @@
 var categoriasJSON = {
     categorias:[
-        {id: 1, nome: "Pizzas Especiais"}, //????????
+        {id: 1, nome: "Pizzas Especiais"}, 
         {id: 2, nome: "Pizzas Doces"},
         {id: 3, nome: "Pizzas Salgadas"},
         {id: 4, nome: "Pizzas Veganas"},
@@ -22,17 +22,19 @@ var produtosJSON = {
                     comentarios: [
                         {
                             id: 1,
-                            usuario: "Maria da Silva",
+                            usuario: 1,
                             data: "15/03/2022",
                             avaliacao: 3,
-                            comentario: "Pizza muito boa! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et."
+                            titulo: "Pizza muito boa! ",
+                            conteudo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et."
                         },
                         {
-                            id: 1,
-                            usuario: "Pedro Gomes Dias",
+                            id: 2,
+                            usuario: 2,
                             data: "21/05/2022",
                             avaliacao: 3,
-                            comentario: "Essa pizza é demais, recomendo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et."
+                            titulo: "Essa pizza é demais, recomendo.",
+                            conteudo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et."
                         }
                     ]
                 },
@@ -131,7 +133,7 @@ var usuariosJSON ={
             ]
         },
         {
-            id: 1,
+            id: 2,
             nome: 'Celeste de Gaulle',
             email: 'gaulle.silva@email.com',
             senha: 'Celeste06',
