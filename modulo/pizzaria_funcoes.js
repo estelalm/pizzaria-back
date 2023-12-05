@@ -54,20 +54,25 @@ const getProdutosCategoria = function (categoriaId){
     let status = false
 
     produtos.forEach ((produto) => {
-        if( produto.categoria.id == IDcategoria){
 
-            let JSONproduto = {}
+        produto.categorias.forEach((categoria) => {
 
-            JSONproduto.id = produto.id
-            JSONproduto.nome = produto.nome
-            JSONproduto.descricao = produto.descricao
-            JSONproduto.imagem = produto.imagem
-            JSONproduto.valor = produto.preco
-            JSONprodutos.categoria = produto.categoria.nome
+            if( categoria.id == IDcategoria){
 
-            arrayProdutos.push(JSONproduto)
-            status = true
-        }
+                let JSONproduto = {}
+    
+                JSONproduto.id = produto.id
+                JSONproduto.nome = produto.nome
+                JSONproduto.descricao = produto.descricao
+                JSONproduto.imagem = produto.imagem
+                JSONproduto.valor = produto.preco
+                JSONprodutos.categorias = categoria.nome
+    
+                arrayProdutos.push(JSONproduto)
+                status = true
+            }
+        })
+
     })
 
     JSONprodutos.status = status
@@ -178,4 +183,14 @@ const getFavoritos = function (idUsuario) {
     return favJson
 }
 
-console.log(getProdutos())
+
+console.log()
+
+module.exports ={
+    getCategorias,
+    getComentarios,
+    getDadosUsuario,
+    getFavoritos, 
+    getProdutos,
+    getProdutosCategoria
+}
