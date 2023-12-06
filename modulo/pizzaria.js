@@ -71,9 +71,9 @@ var produtosJSON = {
         },
         {
             id: 4,
-            nome: "Pizza vegana",
+            nome: "Pizza de brócoli",
             descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            imagem: "chocolate-morango.png",
+            imagem: "brocoli.png",
             preco: "19,00",
             categorias: [
                 categoriasJSON.categorias[0],
@@ -131,6 +131,19 @@ var produtosJSON = {
             ],
             comentarios: [
             ]
+        },
+        {
+            id: 9,
+            nome: "Suco de Uva",
+            descricao: "Suco de uva garrafa 500ml",
+            imagem: "suco-uva.png",
+            preco: "10,00",
+            categorias: [
+                categoriasJSON.categorias[1],
+                categoriasJSON.categorias[8]
+            ],
+            comentarios: [
+            ]
         }
     ]
 }
@@ -143,7 +156,7 @@ var usuariosJSON = {
             email: 'fulano.silva@email.com',
             senha: 'Fulano01',
             telefone: "11111111",
-            imagem: "/img/user1.png",
+            imagem: "user1.png",
             localizacao: [
                 {
                     id: 1,
@@ -159,17 +172,36 @@ var usuariosJSON = {
         {
             id: 2,
             nome: 'Celeste de Gaulle',
-            email: 'gaulle.silva@email.com',
+            email: 'gaulleste@email.com',
             senha: 'Celeste06',
-            telefone: "11111111",
+            telefone: "22222222",
             imagem: "/img/user2.png",
             localizacao: [
                 {
-                    id: 1,
+                    id: 2,
                     estado: 'SP',
                     cidade: "Jandira",
-                    logradouro: "Rua Pra lá de LOnge",
+                    logradouro: "Rua Pra lá de Longe",
                     bairro: "Parque da França ",
+                    numero: "6",
+                    pais: 'Brasil'
+                }
+            ]
+        },
+        {
+            id: 3,
+            nome: 'Pedro Gomes Dias',
+            email: 'pedrodias@email.com',
+            senha: 'PGD127',
+            telefone: "33333333333",
+            imagem: "user3.png",
+            localizacao: [
+                {
+                    id: 2,
+                    estado: 'SP',
+                    cidade: "São Paulo",
+                    logradouro: "Avenida São Paulo",
+                    bairro: "Bairro em São Paulo ",
                     numero: "6",
                     pais: 'Brasil'
                 }
@@ -187,6 +219,10 @@ var favoritosJSON = {
         {
             id_usuario: 2,
             favoritos: [3, 4]
+        },
+        {
+            id_usuario: 3,
+            favoritos: []
         }
     ]
 }

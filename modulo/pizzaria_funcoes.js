@@ -12,7 +12,7 @@ const getProdutos = function (){
 
     produtos.forEach((produto) => {
 
-        produto.categoria = produto.categoria.nome
+        produto.categorias = produto.categorias
         produtosArray.push(produto)
 
         status = true
@@ -154,7 +154,7 @@ const getDadosUsuario = function (IDusuario) {
 const getFavoritos = function (idUsuario) {
 
     let usuarioId = idUsuario
-    let favoritos = favoritosJSON.usuarios
+    let favoritos = pizzaria.favoritosJSON.usuarios
     let favArray = []
     let favJson = {}
 
@@ -183,8 +183,28 @@ const getFavoritos = function (idUsuario) {
     return favJson
 }
 
+const getListaUsuarios = function () {
 
-console.log()
+    let JSONusuarios =  {}
+    let arrayUsuarios = []
+    let usuarios = pizzaria.usuariosJSON.usuarios
+
+    let status = false
+
+    usuarios.forEach((usuario) =>{
+        arrayUsuarios.push(usuario)
+
+        status = true
+    })
+
+    JSONusuarios.status = status
+    JSONusuarios.quantidade = arrayUsuarios.length
+    JSONusuarios.usuarios = arrayUsuarios
+    
+    return JSONusuarios
+}
+
+
 
 module.exports ={
     getCategorias,
@@ -192,5 +212,6 @@ module.exports ={
     getDadosUsuario,
     getFavoritos, 
     getProdutos,
-    getProdutosCategoria
+    getProdutosCategoria,
+    getListaUsuarios
 }
