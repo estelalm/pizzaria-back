@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const pizzaria_funcoes = require('./modulo/pizzaria_funcoes.js')
 const { postUsuario } = require('./modulo/pizzaria_funcoes.js')
+const { recomendadosJSON } = require('./modulo/pizzaria.js')
 
 const app = express()
 
@@ -108,6 +109,23 @@ app.get('/produtos/favoritos', cors(), async function(request, response, next){
 
 })
 
+app.get('/produtos/recomendados', cors(), async function(request, response, next){
+
+    let controlePizzaria = require('./modulo/pizzaria_funcoes.js')
+    let recomendados = controlePizzaria.getRecomendados()
+
+    if(recomendados){
+        response.json(recomendados)
+        response.status(200)
+        }else{
+            response.json({erro:'itens não encontrados'})
+            response.status(404)
+        }
+
+        next()
+
+})
+
 app.get('/usuario/id/:userId', cors(), async function(request, response, next) {
 
     let usuarioId = request.params.userId
@@ -149,17 +167,6 @@ app.post('/usuarios', cors(), async function(request, response, next) {
     next()
 })
 
-app.post('/usuarios', cors(),async function(request, response, next) {
-    let controlePizzaria = require('./modulo/pizzaria_funcoes.js')
-    response.send(request.body)
-    controlePizzaria.postUsuario(request.body)
-    next()
-})
-app.get('/usuario/post', cors(), async function(request, response, next) {
-    let controlePizzaria = require('./modulo/pizzaria_funcoes.js')
-    response.json(controlePizzaria.getTeste())
-    next()
-})
 
 
 app.post('/produtos/favoritos', cors(), async function(request, response, next){
