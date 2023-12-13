@@ -56,6 +56,14 @@ var produtosJSON = {
             categorias: [categoriasJSON.categorias[0],
             categoriasJSON.categorias[3]],
             comentarios: [
+                {
+                    id: 3,
+                    usuario: 2,
+                    data: "13/12/2023",
+                    avaliacao: 1,
+                    titulo: "PIZZA HORROROSA! ",
+                    conteudo: "Horível, tem muito queijo! Eu odeio queijo!"
+                },
             ]
         },
         {
@@ -75,7 +83,7 @@ var produtosJSON = {
             id: 4,
             nome: "Pizza de brócoli",
             descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            imagem: "brocoli.png",
+            imagem: "pizza-brocolis.webp",
             preco: "19,00",
             avaliacao: 4,
             categorias: [
@@ -89,13 +97,37 @@ var produtosJSON = {
             id: 5,
             nome: "Bolo de chocolate",
             descricao: "Bolo. de. chocolate",
-            imagem: "bolo-chocolate.png",
+            imagem: "bolo-chocolate.jpg",
             preco: "10,00",
             avaliacao: 3,
             categorias: [
                 categoriasJSON.categorias[2]
             ],
             comentarios: [
+                {
+                    id: 4,
+                    usuario: 1,
+                    data: "13/12/2023",
+                    avaliacao: 2,
+                    titulo: "Muito seco. ",
+                    conteudo: "O bolo tinha gosto de chocolate, mas estava muito seco!"
+                },
+                {
+                    id: 5,
+                    usuario: 2,
+                    data: "13/12/2023",
+                    avaliacao: 5,
+                    titulo: "ÓTIMO BOLO",
+                    conteudo: "As pessoas não sabem do qe falam, o bolo estava ótimo"
+                },
+                {
+                    id: 6,
+                    usuario: 3,
+                    data: "13/12/2023",
+                    avaliacao: 4,
+                    titulo: "É realmente um bolo. ",
+                    conteudo: "Bom, mas nada mais que isso."
+                },
             ]
         },
         {
@@ -164,7 +196,7 @@ var usuariosJSON = {
             email: 'celso.silva@email.com',
             senha: 'Fulano01',
             telefone: "19457382",
-            imagem: "user1.png",
+            imagem: "../img/user1.png",
             localizacao: [
                 {
                     id: 1,
@@ -183,7 +215,7 @@ var usuariosJSON = {
             email: 'gaulleste@email.com',
             senha: 'Celeste06',
             telefone: "22222222",
-            imagem: "user2.png",
+            imagem: "../img/user2.jpg",
             localizacao: [
                 {
                     id: 2,
@@ -202,7 +234,7 @@ var usuariosJSON = {
             email: 'pedrodias@email.com',
             senha: 'PGD127',
             telefone: "33333333333",
-            imagem: "user3.png",
+            imagem: "../img/user3.webp",
             localizacao: [
                 {
                     id: 2,
@@ -235,8 +267,9 @@ var favoritosJSON = {
     ]
 }
 
-var usuariosTeste = {
-usuarios:[]
+
+var recomendadosJSON = {
+    recomendados: [1, 2, 3, 4, 5, 8]
 }
 
 module.exports = {
@@ -244,5 +277,5 @@ module.exports = {
     produtosJSON,
     usuariosJSON,
     favoritosJSON,
-    usuariosTeste
+    recomendadosJSON
 }

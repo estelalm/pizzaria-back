@@ -1,10 +1,9 @@
 
-const { usuariosTeste } = require('./pizzaria.js')
 var pizzaria = require('./pizzaria.js')
 
 produtos = pizzaria.produtosJSON.produtos
 
-const getProdutos = function (){
+const getProdutos = function () {
 
     let JSONprodutos = {}
     let produtosArray = []
@@ -27,13 +26,13 @@ const getProdutos = function (){
 
 const getCategorias = function () {
 
-    let JSONcategorias =  {}
+    let JSONcategorias = {}
     let arrayCategorias = []
     let categorias = pizzaria.categoriasJSON.categorias
 
     let status = false
 
-    categorias.forEach((categoria) =>{
+    categorias.forEach((categoria) => {
         arrayCategorias.push(categoria)
 
         status = true
@@ -42,11 +41,11 @@ const getCategorias = function () {
     JSONcategorias.status = status
     JSONcategorias.quantidade = arrayCategorias.length
     JSONcategorias.categorias = arrayCategorias
-    
+
     return JSONcategorias
 }
 
-const getProdutosCategoria = function (categoriaId){
+const getProdutosCategoria = function (categoriaId) {
 
     let IDcategoria = categoriaId
     let JSONprodutos = {}
@@ -54,21 +53,21 @@ const getProdutosCategoria = function (categoriaId){
 
     let status = false
 
-    produtos.forEach ((produto) => {
+    produtos.forEach((produto) => {
 
         produto.categorias.forEach((categoria) => {
 
-            if( categoria.id == IDcategoria){
+            if (categoria.id == IDcategoria) {
 
                 let JSONproduto = {}
-    
+
                 JSONproduto.id = produto.id
                 JSONproduto.nome = produto.nome
                 JSONproduto.descricao = produto.descricao
                 JSONproduto.imagem = produto.imagem
                 JSONproduto.valor = produto.preco
                 JSONprodutos.categorias = categoria.nome
-    
+
                 arrayProdutos.push(JSONproduto)
                 status = true
             }
@@ -83,7 +82,7 @@ const getProdutosCategoria = function (categoriaId){
     return JSONprodutos
 }
 
-const getComentarios = function (produtoId){
+const getComentarios = function (produtoId) {
 
     let usuarios = pizzaria.usuariosJSON.usuarios
     let idProduto = produtoId
@@ -94,9 +93,9 @@ const getComentarios = function (produtoId){
 
     produtos.forEach((produto) => {
 
-        if(produto.id == idProduto){
-            
-            produto.comentarios.forEach((comentario) =>{
+        if (produto.id == idProduto) {
+
+            produto.comentarios.forEach((comentario) => {
                 let JSONcomentario = {}
 
                 JSONcomentario.titulo = comentario.titulo
@@ -106,11 +105,11 @@ const getComentarios = function (produtoId){
 
                 usuarios.forEach((usuario) => {
 
-                    if(comentario.usuario == usuario.id){
+                    if (comentario.usuario == usuario.id) {
 
                         JSONcomentario.usuario = usuario.nome
                         JSONcomentario.perfil = usuario.imagem
-                        
+
                         status = true
                     }
                 })
@@ -137,9 +136,9 @@ const getDadosUsuario = function (IDusuario) {
 
     let status = false
 
-    usuarios.forEach((usuario) =>{
+    usuarios.forEach((usuario) => {
 
-        if(usuarioId == usuario.id){
+        if (usuarioId == usuario.id) {
             status = true
             usuarioJSON.usuario = usuario
         }
@@ -163,13 +162,13 @@ const getFavoritos = function (idUsuario) {
 
     favoritos.forEach((favorito) => {
 
-        if(favorito.id_usuario == usuarioId){
+        if (favorito.id_usuario == usuarioId) {
             favoritosUsuario = favorito.favoritos
 
             favoritosUsuario.forEach((favItem) => {
 
-                produtos.forEach((produto) =>{
-                    if(produto.id == favItem){
+                produtos.forEach((produto) => {
+                    if (produto.id == favItem) {
                         status = true
                         favArray.push(produto)
                     }
@@ -186,13 +185,13 @@ const getFavoritos = function (idUsuario) {
 
 const getListaUsuarios = function () {
 
-    let JSONusuarios =  {}
+    let JSONusuarios = {}
     let arrayUsuarios = []
     let usuarios = pizzaria.usuariosJSON.usuarios
 
     let status = false
 
-    usuarios.forEach((usuario) =>{
+    usuarios.forEach((usuario) => {
         arrayUsuarios.push(usuario)
 
         status = true
@@ -201,11 +200,11 @@ const getListaUsuarios = function () {
     JSONusuarios.status = status
     JSONusuarios.quantidade = arrayUsuarios.length
     JSONusuarios.usuarios = arrayUsuarios
-    
+
     return JSONusuarios
 }
 
-const getProdutoId = (idProduto) =>{
+const getProdutoId = (idProduto) => {
 
     let produtoId = idProduto
 
@@ -213,7 +212,7 @@ const getProdutoId = (idProduto) =>{
     let JSONproduto = {}
 
     produtos.forEach((produto) => {
-        if(produto.id == produtoId){
+        if (produto.id == produtoId) {
             status = true
             JSONproduto.produto = produto
         }
@@ -223,48 +222,75 @@ const getProdutoId = (idProduto) =>{
     return JSONproduto
 }
 
-let postUsuario = (usuarioNovo) =>{
+let postUsuario = (usuarioNovo) => {
     pizzaria.usuariosJSON.usuarios.push(usuarioNovo)
+    pizzaria.favoritosJSON.usuarios.push({
+        id_usuario: usuarioNovo.id,
+        favoritos:[]
+    })
 }
-let toggleFavorito = (idUsuario, idProduto, eFavorito) =>{
 
-    usuario = idUsuario
-    produto = idProduto
-    fav = eFavorito
+let toggleFavorito = (idUsuario, idProduto, eFavorito) => {
 
-    favoritosArray = pizzaria.favoritosJSON.usuarios
+    let usuario = idUsuario
+    let produto = idProduto
+    let fav = eFavorito
+
+    let favoritosArray = pizzaria.favoritosJSON.usuarios
 
     let status = false
-    favoritosArray.forEach(user =>{
+    let favString = ""
+    let controle = 0
+    favoritosArray.forEach(user => {
 
-        if(user.id_usuario == usuario){
-            status= true
-            if(fav){
-                
-                user.favoritos.splice(user.favoritos.indexOf(produto), 1)  
-            }else{
+        if (user.id_usuario == usuario) {
+            status = true
+            if (fav) {
                 user.favoritos.push(produto)
+            } else {
+                user.favoritos.splice(user.favoritos.indexOf(produto), 1)
             }
         }
+
     })
     return status
 }
 
+const getRecomendados = function () {
 
-let getTeste = () =>{
-    return(usuariosTeste)
+    let recomendados = pizzaria.recomendadosJSON.recomendados
+    let recJson = {}
+    let recArray = []
+
+    let status = false
+
+    recomendados.forEach((rec) => {
+
+        produtos.forEach((produto) => {
+            if (produto.id == rec) {
+                status = true
+                recArray.push(produto)
+            }
+        })
+    })
+
+    recJson.recomendados = recArray
+    recJson.status = status
+
+    return recJson
 }
 
-module.exports ={
+
+module.exports = {
     getCategorias,
     getComentarios,
     getDadosUsuario,
-    getFavoritos, 
+    getFavoritos,
     getProdutos,
     getProdutosCategoria,
     getListaUsuarios,
     getProdutoId,
     postUsuario,
-    toggleFavorito,
-    getTeste
+    getRecomendados,
+    toggleFavorito
 }

@@ -3,8 +3,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const pizzaria_funcoes = require('./modulo/pizzaria_funcoes.js')
-const { postUsuario } = require('./modulo/pizzaria_funcoes.js')
-const { recomendadosJSON } = require('./modulo/pizzaria.js')
 
 const app = express()
 
@@ -19,7 +17,8 @@ app.use((request,response,next) =>{
     next()
 })
 
-
+//ENDPOINT 
+//Pegar lista de produtos
 app.get('/produtos', cors(), async function(request, response, next){
     let controlePizzaria = require('./modulo/pizzaria_funcoes.js')
     let listaDeProdutos = controlePizzaria.getProdutos()
@@ -36,6 +35,8 @@ app.get('/produtos', cors(), async function(request, response, next){
 
 })
 
+//ENDPOINT 
+//Pegar lista de categorias
 app.get('/produtos/categorias', cors(), async function(request, response, next){
 
    
@@ -54,6 +55,8 @@ app.get('/produtos/categorias', cors(), async function(request, response, next){
     next()
 })
 
+//ENDPOINT 
+//Pegar produtos pelo id da categoria
 app.get('/produtos/categoria/id/:categoria', cors(), async function(request, response, next){
 
     let idCategoria = request.params.categoria
@@ -73,6 +76,8 @@ app.get('/produtos/categoria/id/:categoria', cors(), async function(request, res
 
 })
 
+//ENDPOINT 
+//Pegar comentarios de um produto pelo id
 app.get('/comentarios/produto/id/:produtoId', cors(), async function(request, response, next){
 
     let idProduto = request.params.produtoId
@@ -91,6 +96,8 @@ app.get('/comentarios/produto/id/:produtoId', cors(), async function(request, re
     next()
 })
 
+//ENDPOINT 
+//Pegar produtos favoritos de um usuario
 app.get('/produtos/favoritos', cors(), async function(request, response, next){
 
     let usuarioId = request.query.usuario
@@ -109,6 +116,8 @@ app.get('/produtos/favoritos', cors(), async function(request, response, next){
 
 })
 
+//ENDPOINT 
+//Pegar produtos recomendados -> json fixo para a tela do front
 app.get('/produtos/recomendados', cors(), async function(request, response, next){
 
     let controlePizzaria = require('./modulo/pizzaria_funcoes.js')
@@ -126,6 +135,8 @@ app.get('/produtos/recomendados', cors(), async function(request, response, next
 
 })
 
+//ENDPOINT 
+//Pegar usuario pelo id
 app.get('/usuario/id/:userId', cors(), async function(request, response, next) {
 
     let usuarioId = request.params.userId
@@ -143,6 +154,8 @@ app.get('/usuario/id/:userId', cors(), async function(request, response, next) {
         next()
 })
 
+//ENDPOINT 
+//Pegar lista de usuarios
 app.get('/usuarios', cors(), async function(request, response, next) {
 
     let controlePizzaria = require('./modulo/pizzaria_funcoes.js')
@@ -158,7 +171,8 @@ app.get('/usuarios', cors(), async function(request, response, next) {
         next()
 })
 
-
+//ENDPOINT 
+//Adicionar um usuário - criar conta
 app.post('/usuarios', cors(), async function(request, response, next) {
     let controlePizzaria = require('./modulo/pizzaria_funcoes.js')
     console.log(request.body)
@@ -168,7 +182,8 @@ app.post('/usuarios', cors(), async function(request, response, next) {
 })
 
 
-
+//ENDPOINT 
+//Adicionar ou remover um item favorito
 app.post('/produtos/favoritos', cors(), async function(request, response, next){
 
     let usuarioId = request.query.usuario
@@ -182,6 +197,8 @@ app.post('/produtos/favoritos', cors(), async function(request, response, next){
 })
 
 
+//ENDPOINT 
+//Pegar produto pelo id
 app.get('/produto/id/:produtoId', cors(), async function(request, response, next){
 
     let idProduto = request.params.produtoId
@@ -201,6 +218,7 @@ app.get('/produto/id/:produtoId', cors(), async function(request, response, next
     next()
 })
 
+//teste
 app.get("/", (req, res) => {
     res.send("Express on Vercel");
   });
@@ -209,4 +227,5 @@ app.listen('8080', function(){
     console.log('API funcionando ')
 })
 
+//
 module.exports = app
