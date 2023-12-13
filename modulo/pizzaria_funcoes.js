@@ -1,4 +1,5 @@
 
+const { usuariosTeste } = require('./pizzaria.js')
 var pizzaria = require('./pizzaria.js')
 
 produtos = pizzaria.produtosJSON.produtos
@@ -204,7 +205,55 @@ const getListaUsuarios = function () {
     return JSONusuarios
 }
 
+const getProdutoId = (idProduto) =>{
 
+    let produtoId = idProduto
+
+    let status = false
+    let JSONproduto = {}
+
+    produtos.forEach((produto) => {
+        if(produto.id == produtoId){
+            status = true
+            JSONproduto.produto = produto
+        }
+    })
+    JSONproduto.status = status
+
+    return JSONproduto
+}
+
+let postUsuario = (usuarioNovo) =>{
+    pizzaria.usuariosJSON.usuarios.push(usuarioNovo)
+}
+let toggleFavorito = (idUsuario, idProduto, eFavorito) =>{
+
+    usuario = idUsuario
+    produto = idProduto
+    fav = eFavorito
+
+    favoritosArray = pizzaria.favoritosJSON.usuarios
+
+    let status = false
+    favoritosArray.forEach(user =>{
+
+        if(user.id_usuario == usuario){
+            status= true
+            if(fav){
+                
+                user.favoritos.splice(user.favoritos.indexOf(produto), 1)  
+            }else{
+                user.favoritos.push(produto)
+            }
+        }
+    })
+    return status
+}
+
+
+let getTeste = () =>{
+    return(usuariosTeste)
+}
 
 module.exports ={
     getCategorias,
@@ -213,5 +262,9 @@ module.exports ={
     getFavoritos, 
     getProdutos,
     getProdutosCategoria,
-    getListaUsuarios
+    getListaUsuarios,
+    getProdutoId,
+    postUsuario,
+    toggleFavorito,
+    getTeste
 }
